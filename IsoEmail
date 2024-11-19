@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function generateEmail() {
+      const currentDate = new Date();
+      const roundedMinutes = Math.round(currentDate.getMinutes() / 5) * 5;
+      const formattedTime = `${String(currentDate.getHours()).padStart(2, '0')}${String(roundedMinutes).padStart(2, '0')}`;
+      
+      const recipient = "clarkc@marash.qld.edu.au;jansonsb@marash.qld.edu.au;dousij@marash.qld.edu.au";
+      const subject = "Theatre Isolated";
+      const body = `theatre isolated from ${formattedTime} until TIME for REASON`;
+      const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      window.location.href = mailtoLink;
+    }
+  </script>
+</head>
+<body onload="generateEmail()">
+</body>
+</html>
