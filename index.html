@@ -46,8 +46,7 @@
       const roundedMinutes = Math.round(currentDate.getMinutes() / 5) * 5;
       const formattedTime = `${String(currentDate.getHours()).padStart(2, '0')}${String(roundedMinutes).padStart(2, '0')}`;
 
-      const recipient = "jensend@marash.qld.edu.au; johnsonj@marash.qld.edu.au";
-      /* const recipient = "lomulderd@marash.qld.edu.au; jansonsb@marash.qld.edu.au"; */
+      const recipient = "lomulderd@marash.qld.edu.au; jansonsb@marash.qld.edu.au";
       const subject = "Theatre Isolated";
       const body = `Theatre isolated from ${formattedTime} until ${finishTime.replace(":", "")} for ${reason}`;
       const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
