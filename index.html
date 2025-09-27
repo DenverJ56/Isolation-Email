@@ -32,27 +32,38 @@
 
   <button onclick="generateEmail()">Send Email</button>
 
-  <script>
-    function generateEmail() {
-      const reason = document.getElementById("reason").value;
-      const finishTime = document.getElementById("finishTime").value;
-
-      if (!finishTime) {
-        alert("Please select a finish time.");
-        return;
-      }
-
-      const currentDate = new Date();
-      const roundedMinutes = Math.round(currentDate.getMinutes() / 5) * 5;
-      const formattedTime = `${String(currentDate.getHours()).padStart(2, '0')}${String(roundedMinutes).padStart(2, '0')}`;
-
-      const recipient = "lomulderd@marash.qld.edu.au; jansonsb@marash.qld.edu.au";
-      const subject = "Theatre Isolated";
-      const body = `Theatre isolated from ${formattedTime} until ${finishTime.replace(":", "")} for ${reason}`;
-      const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-      window.location.href = mailtoLink;
+<script>
+  function generateEmail() {
+    const reason = document.getElementById("reason").value;
+    const finishTime = document.getElementById("finishTime").value;
+    if (!finishTime) {
+      alert("Please select a finish time.");
+      return;
     }
-  </script>
+
+    // Round current time to nearest 5 minutes (handles :60 roll-over)
+    const now = new Date();
+    let mins = Math.round(now.getMinutes() / 5) * 5;
+    let hrs = now.getHours();
+    if (mins === 60) { hrs = (hrs + 1) % 24; mins = 0; }
+    const formattedTime = `${String(hrs).padStart(2,'0')}${String(mins).padStart(2,'0')}`;
+
+    const recipients = [
+      "lomulderd@marash.qld.edu.au",
+      "jansonsb@marash.qld.edu.au"
+    ]; // use commas for mailto
+
+    const subject = "Theatre Isolated";
+    const body = `Theatre isolated from ${formattedTime} until ${finishTime.replace(":","")} for ${reason}`;
+
+    const mailtoLink =
+      `mailto:${recipients.join(",")}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoLink;
+  }
+</script>
+
 </body>
 </html>
